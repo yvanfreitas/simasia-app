@@ -1,3 +1,3 @@
-module example-date
+//module example-date
 
 go 1.12
