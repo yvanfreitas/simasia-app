@@ -1,5 +1,4 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Card from '@material-ui/core/Card';
@@ -10,8 +9,23 @@ import Typography from '@material-ui/core/Typography';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
 import './App.css';
+
+let framework;
+let frameworks = {
+	cx: require('./frameworks/cx.json'),
+	rut: require('./frameworks/rut.json'),
+	gut: require('./frameworks/cx.json'),
+	moskow: require('./frameworks/cx.json'),
+	rice: require('./frameworks/cx.json'),
+};
+
+var pathname = window.location.pathname.replace('/','');
+if(pathname){
+	framework = frameworks[pathname];
+}else{
+	framework = frameworks['cx'];
+}
 
 function App() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -50,52 +64,34 @@ function App() {
 		calc(newSize,value);
 	};
 
-	var tempPriority = [];
-	tempPriority.class = 'result-card priority-d';
-	tempPriority.title = 'Lizard';
-	tempPriority.desc = 'Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging across all continents except Antarctica';
-	tempPriority.img = '/contemplative-reptile.jpg';
+	const [kind, setKind] = React.useState(framework[0]);
 
+	const handleKind = (event, newKind) => {
+		setSize(0);
+		setValue(0);
+		if(newKind){
+			setKind(newKind);
+		}
+	};
 	const [priority, setPriority] = React.useState([]);
-
 
 	function calc(size,value){
 		let score = parseInt(size)+parseInt(value);
 		var tempPriority = [];
-
 		if(parseInt(size)>0 &&  parseInt(value)>0){
-			if(score >= 1 && score <= 3){
-				tempPriority.class = 'result-card priority-xs';
-				tempPriority.title = 'Muito baixa';
-				tempPriority.desc = 'Provavelmente não vale a pena focarmos nossas energias nessa Issue.';
-				tempPriority.img = '/GPgJ.gif';
+			for(let i=0; kind.priority.length>i; i++){
+				if(kind.priority[i].minscore <= score && kind.priority[i].maxscore >= score){
+					tempPriority.title = kind.priority[i].name;
+					tempPriority.desc = kind.priority[i].description;
+					tempPriority.img = kind.priority[i].image;
+
+					if(prefersDarkMode){
+						tempPriority.style = {backgroundColor: kind.priority[i].color};
+					}else{
+						tempPriority.style = {color: kind.priority[i].color};
+					}
+				} 
 			}
-			if(score >= 4 && score <= 5){
-				tempPriority.class = 'result-card priority-s';
-				tempPriority.title = 'Baixa';
-				tempPriority.desc = 'Podemos olhar para essa Issue quando estivermos tranquilos.';
-				tempPriority.img = '/01-funny-gif-138-red-panda-walking.gif';
-			}
-			if(score == 6){
-				tempPriority.class = 'result-card priority-m';
-				tempPriority.title = 'Média';
-				tempPriority.desc = 'Essa é uma Issue média. Está exatamente balanceada entre esforço e valor.';
-				tempPriority.img = '/Lhab.gif';
-			}
-			if(score >= 7 && score <= 8){
-				tempPriority.class = 'result-card priority-l';
-				tempPriority.title = 'Alta';
-				tempPriority.desc = 'Não é nossa maior prioridade, mas é algo importante. Independente do esforço, devemos ataca-la!';
-				tempPriority.img = '/running-cheetah.gif';
-			}
-			if(score >= 9 && score <= 10){
-				tempPriority.class = 'result-card priority-xl';
-				tempPriority.title = 'Muito Alta';
-				tempPriority.desc = 'Essa é uma Issue importante e rápida de "shipar". Vamos focar nossas energias nela!';
-				tempPriority.img = '/RichPoliticalAustraliancurlew-size_restricted.gif';
-			}
-		}else{
-			tempPriority.class = 'result-card priority-d';
 		}
 		setPriority(tempPriority);
 	}
@@ -104,234 +100,94 @@ function App() {
 		<main>
 			<ThemeProvider theme={theme}>
 			<CssBaseline/>
+
 			<Typography variant="h2">Simasia</Typography>
 			<Typography variant="subtitle1">Um simples priorizador de Issues!</Typography>
+
+			<ToggleButtonGroup 
+						className="kinds"
+						value={kind}
+						exclusive
+						onChange={handleKind}
+					>
+				{framework.map(kindobj => (
+					<ToggleButton className="kind-option" value={kindobj} aria-label={kindobj.label}>
+						<Typography variant="body2" component="p">
+							{kindobj.name}
+						</Typography>
+					</ToggleButton>
+            	))}
+			</ToggleButtonGroup>
+
 			<Typography variant="h4">Relevância</Typography>
-					<ToggleButtonGroup 
-						className="options"
-						value={value}
-						exclusive
-						onChange={handleValue}
-						aria-label="text Value"
-					>
-						<ToggleButton className="option" value="1" aria-label="xs">
-							
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										É um desejo nosso, mas não faz parte do conceito do produto
-									</Typography>
-								</CardContent>
-							</Card>
 
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Sabemos que isso pode ficar para depois
-									</Typography>
-								</CardContent>
-							</Card>
+			<ToggleButtonGroup 
+				className="options"
+				value={value}
+				exclusive
+				onChange={handleValue}
+				aria-label="text Value"
+			>
 
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Nosso cliente pode estranhar, mas é contornável
-									</Typography>
-								</CardContent>
-							</Card>
-
-						</ToggleButton>
-						<ToggleButton className="option" value="2" aria-label="s">
-							
+			{kind.value.map(value => ( 
+				<ToggleButton className="option" value={value.score} aria-label={value.name}>
+					{value.questions.map(question => (
 						<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Achamos que complementa o conceito do produto
-									</Typography>
-								</CardContent>
-							</Card>
+							<CardContent>
+								<Typography variant="body2" component="p">
+									{question}
+								</Typography>
+							</CardContent>
+						</Card>
+					))}
+				</ToggleButton>
+			))}	
 
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Podemos esperar com algum custo de oportunidade
-									</Typography>
-								</CardContent>
-							</Card>
+			</ToggleButtonGroup>
 
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Sabemos que a falta disso pode prejudicar a experiência
-									</Typography>
-								</CardContent>
-							</Card>
+			<Typography variant="h4">Esforço</Typography>
 
-						</ToggleButton>
-						<ToggleButton className="option" value="3" aria-label="m">
-							
+			<ToggleButtonGroup 
+					className="options"
+					value={size}
+					exclusive
+					onChange={handleSize}
+					aria-label="text Size"
+				>
+			{kind.size.map(size => ( 
+				<ToggleButton className="option" value={size.score} aria-label={size.name}>
+					{size.questions.map(question => (
 						<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Já comprovamos a importância disso para o produto
-									</Typography>
-								</CardContent>
-							</Card>
+							<CardContent>
+								<Typography variant="body2" component="p">
+									{question}
+								</Typography>
+							</CardContent>
+						</Card>
+					))}
+				</ToggleButton>
+			))}	
+			</ToggleButtonGroup>
 
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Queremos lançar em breve, dado o custo de oportunidade
-									</Typography>
-								</CardContent>
-							</Card>
-
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Já nos certificamos que a ausência disso causa frustração
-									</Typography>
-								</CardContent>
-							</Card>
-
-						</ToggleButton>
-						<ToggleButton className="option" value="4" aria-label="l">
-							
-						<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Estamos assumindo um risco ao lançar sem isso
-									</Typography>
-								</CardContent>
-							</Card>
-
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Teremos problemas e perdas muito em breve sem isso
-									</Typography>
-								</CardContent>
-							</Card>
-
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Teremos uma péssima experiência sem isso 
-									</Typography>
-								</CardContent>
-							</Card>
-
-						</ToggleButton>
-						<ToggleButton className="option" value="5" aria-label="xl">
-
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Sabemos que o produto não é utilizável sem isso
-									</Typography>
-								</CardContent>
-							</Card>
-
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Precisamos reduzir a perda, parar demandas e fazer isso
-									</Typography>
-								</CardContent>
-							</Card>
-
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Perderemos fatalmente nossos clientes sem isso
-									</Typography>
-								</CardContent>
-							</Card>
-
-						</ToggleButton>
-					</ToggleButtonGroup>
-				<Typography variant="h4">Esforço</Typography>
-				<ToggleButtonGroup 
-						className="options"
-						value={size}
-						exclusive
-						onChange={handleSize}
-						aria-label="text Size"
-					>
-						<ToggleButton className="option" value="5" aria-label="xs">
-							
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Horas
-									</Typography>
-								</CardContent>
-							</Card>
-
-						</ToggleButton>
-						<ToggleButton className="option" value="4" aria-label="s">
-							
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Dia
-									</Typography>
-								</CardContent>
-							</Card>
-
-						</ToggleButton>
-						<ToggleButton className="option" value="3" aria-label="m">
-							
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Dias
-									</Typography>
-								</CardContent>
-							</Card>
-
-						</ToggleButton>
-						<ToggleButton className="option" value="2" aria-label="l">
-							
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Semana
-									</Typography>
-								</CardContent>
-							</Card>
-
-						</ToggleButton>
-						<ToggleButton className="option" value="1" aria-label="xl">
-
-							<Card className="root">
-								<CardContent>
-									<Typography variant="body2" component="p">
-										Semanas
-									</Typography>
-								</CardContent>
-							</Card>
-
-						</ToggleButton>
-					</ToggleButtonGroup>
-				<Typography variant="h4">Prioridade</Typography>
-				<Card className={priority.class}>
-					<CardActionArea>
-						<CardMedia
-							className="result-img"
-							image={priority.img}
-							title="Contemplative Reptile"
-						/>
-						<CardContent>
-							<Typography gutterBottom variant="h5" component="h2">
-								{priority.title}
-							</Typography>
-							<Typography variant="body2" color="textSecondary" component="p">
-								{priority.desc}
-							</Typography>
-						</CardContent>
-					</CardActionArea>
-				</Card>
+			<Typography variant="h4">Prioridade</Typography>
+			
+			<Card className="result-card" style={priority.style}>
+				<CardActionArea>
+					<CardMedia
+						className="result-img"
+						image={priority.img}
+						title="Contemplative Reptile"
+					/>
+					<CardContent>
+						<Typography gutterBottom variant="h5" component="h2">
+							{priority.title}
+						</Typography>
+						<Typography variant="body2" color="textSecondary" component="p">
+							{priority.desc}
+						</Typography>
+					</CardContent>
+				</CardActionArea>
+			</Card>
 
 			</ThemeProvider>		
 		</main>

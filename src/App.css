@@ -1,18 +1,3 @@
-npmmain {
-  align-content: center;
-  box-sizing: border-box;
-  display: grid;
-  font-family: 'SF Pro Text', 'SF Pro Icons', 'Helvetica Neue', 'Helvetica',
-    'Arial', sans-serif;
-  hyphens: auto;
-  line-height: 1.65;
-  margin: 0 auto;
-  max-width: 680px;
-  min-height: 100vh;
-  padding: 72px 0;
-  text-align: center;
-}
-
 h6,h1,h2,h3,h4 {
   text-align: center;
 }
@@ -34,11 +19,16 @@ h4{
   display: block !important;
   width: -webkit-fill-available;
 }
-.options{
+.options, .kinds{
   margin: auto !important;
   align-items: center;
-  justify-content: center;
   display: flex !important;
+  overflow: auto;
+}
+
+.kinds{
+  margin-top: 3% !important;
+  justify-content: center;
 }
 
 .result-card{
@@ -46,38 +36,10 @@ h4{
   margin: 0% auto 5% auto;
 }
 
-.result-card *{
-  color:#fff !important;
-
-}
 .result-img {
   height: 140px;
-}
-
-.priority-xl .MuiCardContent-root{
-  background-color: rgba(0,0,0,1);
-}
-
-.priority-l .MuiCardContent-root{
-  background-color: rgb(74, 3, 3);
-}
-
-.priority-m .MuiCardContent-root{
-  background-color: rgb(72, 44, 2);
-}
-
-.priority-s .MuiCardContent-root{
-  background-color: rgb(17, 48, 95);
 }
 
 .result-card .MuiCardContent-root{
   min-height: 140px;
 }
-
-.priority-d{
-  opacity:0;
-}
-
-/* .result-card .xs .MuiCardContent-root{
-  /background-color: rgba(200,200,200,1);
-} */
