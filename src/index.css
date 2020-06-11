@@ -12,3 +12,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+footer {
+  text-align: right;
+  font-size: smaller;
+}
+footer a{
+  color: #009688;
+  text-decoration: none;
+}

@@ -95,7 +95,6 @@ function App() {
 				break;
 			}
 		}		
-
 		return score;
 	}
 
@@ -103,18 +102,22 @@ function App() {
 		let score = calculateScore(value);
 		var tempPriority = [];
 		if(score){
-			for(let i=0; kind.priority.length>i; i++){
-				if(kind.priority[i].minscore <= score && kind.priority[i].maxscore >= score){
-					tempPriority.title = kind.priority[i].name;
-					tempPriority.desc = kind.priority[i].description;
-					tempPriority.img = kind.priority[i].image;
+			if(kind.priority){
+				for(let i=0; kind.priority.length>i; i++){
+					if(kind.priority[i].minscore <= score && kind.priority[i].maxscore >= score){
+						tempPriority.title = kind.priority[i].name;
+						tempPriority.desc = kind.priority[i].description;
+						tempPriority.img = kind.priority[i].image;
 
-					if(prefersDarkMode){
-						tempPriority.style = {backgroundColor: kind.priority[i].color};
-					}else{
-						tempPriority.style = {color: kind.priority[i].color};
-					}
-				} 
+						if(prefersDarkMode){
+							tempPriority.style = {backgroundColor: kind.priority[i].color};
+						}else{
+							tempPriority.style = {color: kind.priority[i].color};
+						}
+					} 
+				}
+			}else{
+				tempPriority.title = score + ' pontos'
 			}
 		}
 		setPriority(tempPriority);
@@ -125,7 +128,7 @@ function App() {
 			<ThemeProvider theme={theme}>
 			<CssBaseline/>
 
-			<Typography variant="h2">Simasia</Typography>
+			<Typography variant="h4">Simasia</Typography>
 			<Typography variant="subtitle1">Um simples priorizador de Issues!</Typography>
 
 			<ToggleButtonGroup 
@@ -136,16 +139,14 @@ function App() {
 					>
 				{framework.map(kindobj => (
 					<ToggleButton className="kind-option" value={kindobj} aria-label={kindobj.label}>
-						<Typography variant="body2" component="p">
-							{kindobj.name}
-						</Typography>
+						{kindobj.name}
 					</ToggleButton>
-            	))}
+				))}
 			</ToggleButtonGroup>
 
 			{kind.variables.map(variable => ( 
 				<div>
-					<Typography variant="h4">{variable.title}</Typography>
+					<Typography variant="h5">{variable.title}</Typography>
 					<ToggleButtonGroup 
 						className="options"
 						value={value[variable.name]}
@@ -171,7 +172,6 @@ function App() {
 				</div>
 			))}	
 
-			<Typography variant="h4">Prioridade</Typography>
 			<Card className="result-card" style={priority.style}>
 				<CardActionArea>
 					<CardMedia
@@ -190,7 +190,7 @@ function App() {
 				</CardActionArea>
 			</Card>
 
-			<Typography variant="h4">Metodologia</Typography>
+			<Typography variant="h5">Metodologia</Typography>
 			<div class="meth" dangerouslySetInnerHTML={{__html: kind.methodology}}></div>
 
 			</ThemeProvider>
