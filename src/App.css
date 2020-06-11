@@ -6,10 +6,10 @@ h4{
   margin: 3% 0% 1% 0% !important;
 }
 
-.root {
+.MuiTypography-body2 {
   min-width: 200px;
   text-transform: none!important;
-  margin: 3% 0;
+  margin: 6% 0 !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,12 +18,16 @@ h4{
 .option{
   display: block !important;
   width: -webkit-fill-available;
+  margin: 0.2% !important;
+  border: none !important;
+  border-radius: 3px !important;  
 }
 .options, .kinds{
   margin: auto !important;
   align-items: center;
   display: flex !important;
   overflow: auto;
+  padding: 2%;
 }
 
 .kinds{
@@ -33,7 +37,7 @@ h4{
 
 .result-card{
   max-width: 345px;
-  margin: 0% auto 5% auto;
+  margin: 0 auto 0 auto;
 }
 
 .result-img {
@@ -42,4 +46,10 @@ h4{
 
 .result-card .MuiCardContent-root{
   min-height: 140px;
+}
+
+.meth{
+  margin: 0 auto 5% auto;
+  text-align: center;
+  padding: 0px 10%;
 }
