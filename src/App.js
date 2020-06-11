@@ -49,36 +49,60 @@ function App() {
       }),
 		[prefersDarkMode],
 	);
-	
-	const [value, setValue] = React.useState('0');
-
-	const handleValue = (event, newValue) => {
-		setValue(newValue);
-		calc(size,newValue);
-	};
-
-	const [size, setSize] = React.useState('0');
-
-	const handleSize = (event, newSize) => {
-		setSize(newSize);
-		calc(newSize,value);
-	};
 
 	const [kind, setKind] = React.useState(framework[0]);
-
 	const handleKind = (event, newKind) => {
-		setSize(0);
-		setValue(0);
+		setValue([]);
+		setPriority([]);
 		if(newKind){
 			setKind(newKind);
 		}
 	};
+	
+	const [value, setValue] = React.useState([]);
+
+	const handleValue  = name => (event, newValue) =>  {
+		value[name] = newValue;
+		setValue(value);
+		showPriority(value);
+	};
+
 	const [priority, setPriority] = React.useState([]);
 
-	function calc(size,value){
-		let score = parseInt(size)+parseInt(value);
+	function calculateScore(value){
+		let score = 0;
+
+		for(let i=0; kind.variables.length>i; i++){
+			if(value[kind.variables[i].name]){
+				switch(kind.variables[i].calc){
+					case 'sum':
+						score = score + value[kind.variables[i].name];
+					break;
+					case 'sub':
+						score = score - value[kind.variables[i].name];
+					break;
+					case 'mul':
+						score = score * value[kind.variables[i].name];
+					break;
+					case 'div':
+						score = score / value[kind.variables[i].name];
+					break;
+					default:
+						score = score + value[kind.variables[i].name];
+				}
+			}else{
+				score = null;
+				break;
+			}
+		}		
+
+		return score;
+	}
+
+	function showPriority(value){
+		let score = calculateScore(value);
 		var tempPriority = [];
-		if(parseInt(size)>0 &&  parseInt(value)>0){
+		if(score){
 			for(let i=0; kind.priority.length>i; i++){
 				if(kind.priority[i].minscore <= score && kind.priority[i].maxscore >= score){
 					tempPriority.title = kind.priority[i].name;
@@ -119,58 +143,35 @@ function App() {
             	))}
 			</ToggleButtonGroup>
 
-			<Typography variant="h4">Relevância</Typography>
-
-			<ToggleButtonGroup 
-				className="options"
-				value={value}
-				exclusive
-				onChange={handleValue}
-				aria-label="text Value"
-			>
-
-			{kind.value.map(value => ( 
-				<ToggleButton className="option" value={value.score} aria-label={value.name}>
-					{value.questions.map(question => (
-						<Card className="root">
-							<CardContent>
-								<Typography variant="body2" component="p">
-									{question}
-								</Typography>
-							</CardContent>
-						</Card>
-					))}
-				</ToggleButton>
+			{kind.variables.map(variable => ( 
+				<div>
+					<Typography variant="h4">{variable.title}</Typography>
+					<ToggleButtonGroup 
+						className="options"
+						value={value[variable.name]}
+						exclusive
+						onChange={handleValue(variable.name)}
+						aria-label="text Value"
+					>
+						
+					{variable.values.map(value => ( 
+						<ToggleButton className="option" value={value.score} aria-label={value.name}>
+							{value.questions.map(question => (
+								//<Card className="root" >
+								//	<CardContent>
+										<Typography variant="body2" component="p">
+											{question}
+										</Typography>
+								//	</CardContent>
+								//</Card>
+							))}
+						</ToggleButton>
+					))}	
+					</ToggleButtonGroup>
+				</div>
 			))}	
-
-			</ToggleButtonGroup>
-
-			<Typography variant="h4">Esforço</Typography>
-
-			<ToggleButtonGroup 
-					className="options"
-					value={size}
-					exclusive
-					onChange={handleSize}
-					aria-label="text Size"
-				>
-			{kind.size.map(size => ( 
-				<ToggleButton className="option" value={size.score} aria-label={size.name}>
-					{size.questions.map(question => (
-						<Card className="root">
-							<CardContent>
-								<Typography variant="body2" component="p">
-									{question}
-								</Typography>
-							</CardContent>
-						</Card>
-					))}
-				</ToggleButton>
-			))}	
-			</ToggleButtonGroup>
 
 			<Typography variant="h4">Prioridade</Typography>
-			
 			<Card className="result-card" style={priority.style}>
 				<CardActionArea>
 					<CardMedia
@@ -189,7 +190,10 @@ function App() {
 				</CardActionArea>
 			</Card>
 
-			</ThemeProvider>		
+			<Typography variant="h4">Metodologia</Typography>
+			<div class="meth" dangerouslySetInnerHTML={{__html: kind.methodology}}></div>
+
+			</ThemeProvider>
 		</main>
 	);
 }
