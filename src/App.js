@@ -15,7 +15,7 @@ let framework;
 let frameworks = {
 	cx: require('./frameworks/cx.json'),
 	rut: require('./frameworks/rut.json'),
-	gut: require('./frameworks/cx.json'),
+	gut: require('./frameworks/gut.json'),
 	moskow: require('./frameworks/cx.json'),
 	rice: require('./frameworks/cx.json'),
 };
@@ -71,9 +71,9 @@ function App() {
 
 	function calculateScore(value){
 		let score = 0;
-
 		for(let i=0; kind.variables.length>i; i++){
 			if(value[kind.variables[i].name]){
+				console.log(kind.variables[i].calc);
 				switch(kind.variables[i].calc){
 					case 'sum':
 						score = score + value[kind.variables[i].name];
@@ -82,7 +82,11 @@ function App() {
 						score = score - value[kind.variables[i].name];
 					break;
 					case 'mul':
-						score = score * value[kind.variables[i].name];
+						if(score == 0){
+							score = value[kind.variables[i].name];
+						}else{
+							score = score * value[kind.variables[i].name];
+						}
 					break;
 					case 'div':
 						score = score / value[kind.variables[i].name];
@@ -191,7 +195,7 @@ function App() {
 			</Card>
 
 			<Typography variant="h5">Metodologia</Typography>
-			<div class="meth" dangerouslySetInnerHTML={{__html: kind.methodology}}></div>
+			<div className="meth" dangerouslySetInnerHTML={{__html: kind.methodology}}></div>
 
 			</ThemeProvider>
 		</main>
