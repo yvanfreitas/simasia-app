@@ -4,24 +4,24 @@
 		"label": "kind/UserStory",
 		"variables": [
 			{
-				"title":"Relevância",
-				"name":"relevancia",
+				"title":"Gravidade",
+				"name":"gravidade",
 				"calc":"mul",
 				"values":[
 					{"name": "XS", "score": 1, "questions": [
-						"Não faz parte do conceito do produto. Seria bom ter, mas ficamos bem sem ele"
+						"Sem gravidade"
 					]},
 					{"name": "S", "score": 2, "questions": [
-						"É relacionado ao conceito do produto, seria bom ter"
+						"Pouco grave"
 					]},
 					{"name": "M", "score": 3, "questions": [
-						"Importante para o conceito do produto"
+						"Grave"
 					]},
 					{"name": "L", "score": 4, "questions": [
-						"Muito importante, o produto fica desfalcado sem isso"
+						"Muito grave"
 					]},
 					{"name": "XL", "score": 5, "questions": [
-						"Não há produto sem este item"
+						"Extremamente grave"
 					]}
 				]
 			},
@@ -31,19 +31,19 @@
 				"calc":"mul",
 				"values":[
 					{"name": "XS", "score": 1, "questions": [
-						"Implementar agora não faz diferença. Dá para esperar"
+						"Pode esperar"
 					]},
 					{"name": "S", "score": 2, "questions": [
-						"Não é bom ficar sem, mas dá para esperar"
+						"Pouco urgente"
 					]},
 					{"name": "M", "score": 3, "questions": [
-						"É desejável lançar em breve, na próxima release talvez"
+						"O mais rápido possível"
 					]},
 					{"name": "L", "score": 4, "questions": [
-						"Teremos problemas se não tiver na próxima release"
+						"É urgente"
 					]},
 					{"name": "XL", "score": 5, "questions": [
-						"É imediato, não podemos esperar a próxima release"
+						"Precisa ser resolvido já"
 					]}
 				]
 			},
@@ -53,23 +53,23 @@
 				"calc":"mul",
 				"values":[
 					{"name": "XS", "score": 1, "questions": [
-						"A primeira impressão não é boa, mas o usuário se acostuma"
+						"Não mudar nada"
 					]},
 					{"name": "S", "score": 2, "questions": [
-						"Pode ser problemático para o usuário continuar sem isso"
+						"Piorar em longo prazo"
 					]},
 					{"name": "M", "score": 3, "questions": [
-						"É certo que o usuário será prejudicado sem isso"
+						"Piorar em médio prazo"
 					]},
 					{"name": "L", "score": 4, "questions": [
-						"O prejuízo para o usuário não é só certo como aumenta com o tempo"
+						"Piorar em curto prazo"
 					]},
 					{"name": "XL", "score": 5, "questions": [
-						"Piora muito a cada dia, é extremamente desgastante para o usuário"
+						"Piorar rapidamente"
 					]}
 				]
 			}
 		],
-		"methodology":"https://code.likeagirl.io/priorizando-sem-trauma-como-ordenar-seu-backlog-de-produto-d143b6037c8d"
+		"methodology":"https://www.siteware.com.br/metodologias/matriz-gut/"
 	}
 ]
