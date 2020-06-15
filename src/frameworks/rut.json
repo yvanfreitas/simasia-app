@@ -1,7 +1,7 @@
 [
 	{
-		"name": "User Story",
-		"label": "kind/UserStory",
+		"name": "Metodologia RUT",
+		"label": "kind/rut",
 		"variables": [
 			{
 				"title":"Relevância",

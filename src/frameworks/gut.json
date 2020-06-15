@@ -1,7 +1,7 @@
 [
 	{
-		"name": "User Story",
-		"label": "kind/UserStory",
+		"name": "Metodologia GUT",
+		"label": "kind/gut",
 		"variables": [
 			{
 				"title":"Gravidade",
