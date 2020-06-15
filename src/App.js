@@ -16,8 +16,7 @@ let frameworks = {
 	cx: require('./frameworks/cx.json'),
 	rut: require('./frameworks/rut.json'),
 	gut: require('./frameworks/gut.json'),
-	moskow: require('./frameworks/cx.json'),
-	rice: require('./frameworks/cx.json'),
+	rice: require('./frameworks/rice.json'),
 };
 
 var pathname = window.location.pathname.replace('/','');

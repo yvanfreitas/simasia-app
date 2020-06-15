@@ -1,0 +1,75 @@
+[
+	{
+		"name": "Metodologia GUT",
+		"label": "kind/gut",
+		"variables": [
+			{
+				"title":"Gravidade",
+				"name":"gravidade",
+				"calc":"mul",
+				"values":[
+					{"name": "XS", "score": 1, "questions": [
+						"Sem gravidade"
+					]},
+					{"name": "S", "score": 2, "questions": [
+						"Pouco grave"
+					]},
+					{"name": "M", "score": 3, "questions": [
+						"Grave"
+					]},
+					{"name": "L", "score": 4, "questions": [
+						"Muito grave"
+					]},
+					{"name": "XL", "score": 5, "questions": [
+						"Extremamente grave"
+					]}
+				]
+			},
+			{
+				"title":"Urgência",
+				"name":"urgencia",
+				"calc":"mul",
+				"values":[
+					{"name": "XS", "score": 1, "questions": [
+						"Pode esperar"
+					]},
+					{"name": "S", "score": 2, "questions": [
+						"Pouco urgente"
+					]},
+					{"name": "M", "score": 3, "questions": [
+						"O mais rápido possível"
+					]},
+					{"name": "L", "score": 4, "questions": [
+						"É urgente"
+					]},
+					{"name": "XL", "score": 5, "questions": [
+						"Precisa ser resolvido já"
+					]}
+				]
+			},
+			{
+				"title":"Tendência",
+				"name":"tendencia",
+				"calc":"mul",
+				"values":[
+					{"name": "XS", "score": 1, "questions": [
+						"Não mudar nada"
+					]},
+					{"name": "S", "score": 2, "questions": [
+						"Piorar em longo prazo"
+					]},
+					{"name": "M", "score": 3, "questions": [
+						"Piorar em médio prazo"
+					]},
+					{"name": "L", "score": 4, "questions": [
+						"Piorar em curto prazo"
+					]},
+					{"name": "XL", "score": 5, "questions": [
+						"Piorar rapidamente"
+					]}
+				]
+			}
+		],
+		"methodology":"https://www.siteware.com.br/metodologias/matriz-gut/"
+	}
+]
