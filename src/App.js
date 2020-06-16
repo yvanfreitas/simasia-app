@@ -13,17 +13,18 @@ import './App.css';
 
 let framework;
 let frameworks = {
+	dpe: require('./frameworks/dpe.json'),
 	cx: require('./frameworks/cx.json'),
 	rut: require('./frameworks/rut.json'),
 	gut: require('./frameworks/gut.json'),
-	rice: require('./frameworks/rice.json'),
+	rice: require('./frameworks/rice.json')
 };
 
 var pathname = window.location.pathname.replace('/','');
 if(pathname){
 	framework = frameworks[pathname];
 }else{
-	framework = frameworks['cx'];
+	framework = frameworks['dpe'];
 }
 
 function App() {

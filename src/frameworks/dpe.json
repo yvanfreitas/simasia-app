@@ -1,0 +1,60 @@
+[
+	{
+		"name": "Design Produto Engenharia",
+		"label": "kind/UserStory",
+		"variables": [
+			{
+				"title":"Relevância",
+				"name":"relevancia",
+				"calc":"sum",
+				"values":[
+					{"name": "XS", "score": 1, "questions": [
+						"É um desejo nosso, mas não faz parte do conceito do produto",
+						"Sabemos que isso pode ficar para depois",
+						"Nosso cliente pode estranhar, mas é contornável"
+					]},
+					{"name": "S", "score": 2, "questions": [
+						"Achamos que complementa o conceito do produto",
+						"Podemos esperar com algum custo de oportunidade",
+						"Sabemos que a falta disso pode prejudicar a experiência"
+					]},
+					{"name": "M", "score": 3, "questions": [
+						"Já comprovamos a importância disso para o produto",
+						"Queremos lançar em breve, dado o custo de oportunidade",
+						"Já nos certificamos que a ausência disso causa frustração"
+					]},
+					{"name": "L", "score": 4, "questions": [
+						"Estamos assumindo um risco ao lançar sem isso",
+						"Teremos problemas e perdas muito em breve sem isso",
+						"Teremos uma péssima experiência sem isso"
+					]},
+					{"name": "XL", "score": 5, "questions": [
+						"Sabemos que o produto não é utilizável sem isso",
+						"Precisamos reduzir a perda, parar demandas e fazer isso",
+						"Perderemos fatalmente nossos clientes sem isso"
+					]}
+				]
+			},
+			{
+				"title":"Esforço",
+				"name":"esforco",
+				"calc":"sum",
+				"values":[
+					{"name": "XS", "score": 5, "questions": ["Muito pequeno"]},
+					{"name": "S", "score": 4, "questions": ["Pequeno"]},
+					{"name": "M", "score": 3, "questions": ["Médio"]},
+					{"name": "L", "score": 2, "questions": ["Grande"]},
+					{"name": "XL", "score": 1, "questions": ["Muito grande"]}
+				]
+			}
+		],
+		"priority": [
+			{"name": "Despriorizado", "description": "Provavelmente não vale a pena focarmos nossas energias nessa Issue.", "image": "/GPgJ.gif", "color": "#222222", "minscore": 2, "maxscore": 3},
+			{"name": "Prioridade Baixa", "description": "Podemos olhar para essa Issue quando estivermos tranquilos.", "image": "/01-funny-gif-138-red-panda-walking.gif", "color": "rgb(17, 48, 95)", "minscore": 4, "maxscore": 5},
+			{"name": "Prioridade Média", "description": "Essa é uma Issue média. Está exatamente balanceada entre esforço e valor.", "image": "/Lhab.gif", "color": "rgb(72, 44, 2)", "minscore": 6, "maxscore": 6},
+			{"name": "Prioridade Alta", "description": "Não é nossa maior prioridade, mas é algo importante. Independente do esforço, devemos ataca-la!", "image": "/running-cheetah.gif", "color": "rgb(74, 3, 3)", "minscore": 7, "maxscore": 8},
+			{"name": "Urgente", "description": "Essa é uma Issue importante e rápida de \"shipar\". Vamos focar nossas energias nela!", "image": "/RichPoliticalAustraliancurlew-size_restricted.gif", "color": "rgb(36, 0, 0)", "minscore": 9, "maxscore": 10}
+		],
+		"methodology":"Essa estrutura priorização foi desenvolvida pelo squad-customerexperience. As opções de Esforço foram adaptadas da <strong>metodologia RUT</strong>.</br> Nessa versão, cada resposta tem um valor, os pontos de cada dimensão são somados e assim chegamos a um score. Cada prioridade tem uma faixa possível de score. "
+	}
+]
