@@ -133,7 +133,7 @@ function App() {
 			<CssBaseline/>
 
 			<Typography variant="h4">Simasia</Typography>
-			<Typography variant="subtitle1">Um simples priorizador de Issues!</Typography>
+			<Typography variant="subtitle1">Calculadora de priorização!</Typography>
 
 			<ToggleButtonGroup 
 						className="kinds"
