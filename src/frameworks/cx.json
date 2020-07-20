@@ -110,5 +110,92 @@
 		],
 		"methodology":"a"
 		
+	},
+	{
+		"name": "Aposta",
+		"label": "kind/bet",
+		"variables": [
+			{
+				"title":"Reach",
+				"name":"reach",
+				"calc":"mul",
+				"values":[
+					{"name": "XS", "score": 0.25, "questions": [
+						"Alguns usuários internos"
+					]},
+					{"name": "S", "score": 0.5, "questions": [
+						"Alguns clientes"
+					]},
+					{"name": "M", "score": 3, "questions": [
+						"Muitos usuários internos"
+					]},
+					{"name": "L", "score": 4, "questions": [
+						"Muitos clientes"
+					]}
+				]
+			},
+			{
+				"title":"Impact",
+				"name":"impact",
+				"calc":"mul",
+				"values":[
+					{"name": "S", "score": 0.5, "questions": [
+						"Impacto pequeno"
+					]},
+					{"name": "M", "score": 1, "questions": [
+						"Impacto médio"
+					]},
+					{"name": "L", "score": 3, "questions": [
+						"Impacto grande"
+					]},
+					{"name": "XL", "score": 4, "questions": [
+						"Impacto muito grande"
+					]}
+				]
+			},
+			{
+				"title":"Confidence",
+				"name":"confidence",
+				"calc":"mul",
+				"values":[
+					{"name": "s", "score": 0.5, "questions": [
+						"50% - Baixa"
+					]},
+					{"name": "M", "score": 0.8, "questions": [
+						"80% - Média"
+					]},
+					{"name": "L", "score": 1, "questions": [
+						"100% - Certeza"
+					]}
+				]
+			},
+			{
+				"title":"Effort",
+				"name":"effort",
+				"calc":"div",
+				"values":[
+					{"name": "XS", "score": 0.3, "questions": [
+						"1 mês"
+					]},
+					{"name": "S", "score": 0.5, "questions": [
+						"1 mês e meio"
+					]},
+					{"name": "M", "score": 0.6, "questions": [
+						"2 meses"
+					]},
+					{"name": "L", "score": 1, "questions": [
+						"1 trimestre"
+					]}
+				]
+			}
+		],
+		"priority": [
+			{"name": "Despriorizado", "description": "Provavelmente não vale a pena focarmos nossas energias nessa Issue.", "image": "/GPgJ.gif", "color": "#222222", "minscore": 0, "maxscore": 1},
+			{"name": "Prioridade Baixa", "description": "Podemos olhar para essa Issue quando estivermos tranquilos.", "image": "/01-funny-gif-138-red-panda-walking.gif", "color": "rgb(17, 48, 95)", "minscore": 1.1, "maxscore": 2.9},
+			{"name": "Prioridade Média", "description": "Essa é uma Issue média. Está exatamente balanceada entre esforço e valor.", "image": "/Lhab.gif", "color": "rgb(72, 44, 2)", "minscore": 3, "maxscore": 6.9},
+			{"name": "Prioridade Alta", "description": "Não é nossa maior prioridade, mas é algo importante. Independente do esforço, devemos ataca-la!", "image": "/running-cheetah.gif", "color": "rgb(74, 3, 3)", "minscore": 7, "maxscore": 13.9},
+			{"name": "Prioridade Muito Alta", "description": "Essa é uma Issue importante e rápida de \"shipar\". Vamos focar nossas energias nela!", "image": "/RichPoliticalAustraliancurlew-size_restricted.gif", "color": "rgb(36, 0, 0)", "minscore": 14, "maxscore": 100}
+		],
+		"methodology":"TBD"
 	}
 ]
