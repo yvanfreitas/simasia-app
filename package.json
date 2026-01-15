@@ -8,7 +8,7 @@
     "@material-ui/lab": "^4.0.0-alpha.54",
     "react": "^16.6.1",
     "react-dom": "^16.6.1",
-    "react-scripts": "2.1.1",
+    "react-scripts": "5.0.1",
     "styled-components": "^5.1.1"
   },
   "scripts": {
